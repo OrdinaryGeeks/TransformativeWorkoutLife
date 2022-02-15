@@ -1,0 +1,154 @@
+
+
+<div class="col-md-8" *ngIf="isGuest &&  !isSignedUpGuest">
+
+
+  <button (click)="guestSignUp()">Become a Member</button>
+</div>
+
+<div class="col-md-8 offset-2" *ngIf="isGuest &&  isSignedUpGuest">
+
+
+  <button class="col-md-3" (click)="toggleAdminSignUp()">Toggle Admin Sign Up</button>
+  <button class="col-md-3 offset-1" (click)="enterMemberArea()">Enter Member Area</button>
+</div>
+
+<div *ngIf="isSignedUpGuest && !isAdmin">
+  <form *ngIf="showAdminSignUp" (ngSubmit)="adminSignUp()">
+
+    <div class="admin_sign_up">
+      <h3 class="center_text admin_sign_up_header">Enter details for your Admin registration</h3>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="nameFromFrontEnd">Enter your Admin account Name</label>
+        <input class="col-md-8" id="nameFromFrontEnd" minLength="5" required [(ngModel)]="nameFromFrontEnd" #valids="ngModel" name="nameFromFrontEnd" />
+      </div>
+      <div *ngIf="valids.invalid && (valids.dirty || valids.touched)"
+           class="alert">
+
+        <div *ngIf="valids.errors['required']">
+          Admin Account  Name is required.
+        </div>
+        <div *ngIf="valids.errors['minlength']">
+          Admin Account Name must be at least 4 characters long.
+        </div>
+
+
+      </div>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="mainBioName">Enter Name for your main Bio Page</label>
+        <input class="col-md-8" id="mainBioName" [(ngModel)]="mainBioName" required name="mainBioName" />
+      </div>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="fbLink">Enter your Facebook Link</label>
+        <input class="col-md-8" id="fbLink" minLength="20" [(ngModel)]="fbLink" required name="fbLink" />
+      </div>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="igLink">Enter your Instagram Link</label>
+        <input class="col-md-8" id="igLink" minLength="21" [(ngModel)]="igLink" required name="igLink" />
+      </div>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="ytLink">Enter your Youtube Link</label>
+        <input class="col-md-8" id="ytLink" minLength="18" [(ngModel)]="ytLink" required name="ytLink" />
+      </div>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="mainBlogName">Enter your Main Blog Name</label>
+        <input class="col-md-8" id="mainBlogName" required minLength="5" maxlength="25" [(ngModel)]="mainBlogName" required name="mainBlogName" />
+      </div>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="blogHeader">Enter your Main Blog Header Link</label>
+        <input class="col-md-8" id="blogHeader" minLength="5" maxlength="25" [(ngModel)]="blogHeader" required name="blogHeader" />
+      </div>
+      <div class="col-md-8 offset-2 form_entry center_block">
+        <div class="col-md-8">
+
+          <!--https://www.tektutorialshub.com/angular/ngmodelchange-change-event-in-angular/-->
+          <input type="radio"
+                 id="adminBlurbLeft"
+                 name="adminBlurbOrientation"
+                 value="1"
+                 [checked]="adminOrientation===1"
+                 (change)="onAdminOrientationSelect(1)" />Admin Media Left
+          <input type="radio"
+                 id="adminBlurbRight"
+                 name="adminBlurbOrientation"
+                 value="2"
+                 (change)="onAdminOrientationSelect(2)"
+                 [checked]="adminOrientation===2" />Admin Media Right
+          <input type="radio"
+                 id="adminBlurbTop"
+                 name="adminBlurbOrientation"
+                 value="3"
+                 (change)="onAdminOrientationSelect(3)"
+                 [checked]="adminOrientation===3" />Admin Media Top
+          <input type="radio"
+                 id="adminBlurbBottom"
+                 name="adminBlurbOrientation"
+                 (change)="onAdminOrientationSelect(4)"
+                 value="4"
+                 [checked]="adminOrientation===4" />Admin Media Bottom
+        </div>
+
+      </div>
+
+
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="adminBlurbMediaLink">Media Link</label>
+        <input class="col-md-8" id="adminBlurbMediaLink" [(ngModel)]="adminBlurbMediaLink" required name="adminBlurbMediaLink" />
+      </div>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="adminBlurbHeight">Media Height</label>
+        <input class="col-md-8" id="adminBlurbHeight" min="200" max="400" [(ngModel)]="adminBlurbHeight" required name="adminBlurbHeight" />
+      </div>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="adminBlurbWidth">Media Width</label>
+        <input class="col-md-8" id="adminBlurbWidth" min="200" max="400" [(ngModel)]="adminBlurbWidth" required name="adminBlurbWidth" />
+      </div>
+      <div class="col-md-8 offset-2 form_entry center_block">
+        <input type="radio"
+               id="adminBlurbImage"
+               name="adminBlurbMediaType"
+               value="1"
+               [checked]="adminMediaType===1"
+               (change)="onAdminMediaTypeChange(1)" />Image
+        <input type="radio"
+               id="adminBlurbVideo"
+               name="adminBlurbMediaType"
+               value="2"
+               [checked]="adminMediaType===2"
+               (change)="onAdminMediaTypeChange(2)" />Video
+      </div>
+      <div class="col-md-8 offset-2 form_entry">
+        <label class="col-md-4" for="adminBlurbText">Description</label>
+        <input class="col-md-8" id="adminBlurbText" minLength="20" [(ngModel)]="adminBlurbText" required name="adminBlurbText" />
+      </div>
+
+
+      <button class="col-md-3" type="submit">Become an Admin</button>
+    </div>
+  </form>
+</div>
+
+<div class="col-md-8" *ngIf="isSignedUpGuest && isAdmin">
+  <button class="col-md-3" (click)="enterAdminArea()">Enter Admin Area</button>
+</div>
+
+
+<div *ngIf="isAdmin && !isTrainer">
+
+  <button (click)="trainerSignUp()">Become a Trainer with TWL</button>
+</div>
+<div *ngIf="isGuest && isSignedUpGuest && isTrainer">
+
+  <button (click)="enterTrainerArea()">Enter Trainer Area</button>
+</div>
+
+
+<div *ngIf="isAdmin && !isMerchant">
+
+  <button (click)="merchantSignUp()">Become a Merchant with TWL</button>
+</div>
+
+<div *ngIf="isAdmin && isMerchant">
+
+  <button (click)="enterMerchantArea()">Enter Merchant Area</button>
+</div>

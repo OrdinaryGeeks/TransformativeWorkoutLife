@@ -1,0 +1,53 @@
+
+
+
+  
+  <div class="row" *ngIf="!isAuthenticated">
+  <app-side-bar class="col-md-4"></app-side-bar>
+  <div class="col-md-8">
+
+
+
+
+    <img class="center_block" height="300" width="300" src="assets\images\TWL.png" />
+
+
+
+
+      <p class="center_text">Physical, Spiritual, and Mental Well Being Training</p>
+      <p class="center_text">Follow trainers to increase your physical conditioning and strength as well as to shape your physique</p>
+      <p class="center_text">Connect with feeds that draw upon spiritual guidance to help lead you in focusing your respect for the higher powers</p>
+      <p class="center_text">Solve brain teasers, crosswords, and word games in order to facilitate clearer thinking through the day</p>
+      <p class="center_text">We offer connects with counselors and therapists to finish out the psychological well being of a person to help orient their goals and give more direction</p>
+      <div class="center_block row">
+        <div class=" col-md-6 offset-3 center_text">Sign Up Now!!!<a class="signUpNowButton" [routerLink]='["/authentication/register"]'>Sign Up</a></div>
+      </div>
+      </div>
+  
+    </div>
+  <div class="row" *ngIf="isAuthenticated">
+    <app-side-bar class="col-md-4"></app-side-bar>
+    <div class="col-md-8"></div>
+
+    <img class="center_block" height="300" width="300" src="assets\images\TWL.png" />
+
+
+    Welcome back {{userName | async}}
+
+    <div *ngIf="isSuperAdmin">
+
+      <div class="col-md-4">
+        Admins
+      </div>
+      <div class="col-md-4">
+        Users
+      </div>
+
+
+
+
+
+    </div>
+
+  </div>
+
